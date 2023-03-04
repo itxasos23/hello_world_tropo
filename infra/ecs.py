@@ -1,5 +1,6 @@
-from troposphere import Base64, Join, Ref, Template, Tags
-from troposphere.autoscaling import AutoScalingGroup, LaunchConfiguration, Metadata, Tags as AutoScalingTags
+from troposphere import Base64, Join, Ref, Tags, Template
+from troposphere.autoscaling import AutoScalingGroup, LaunchConfiguration, Metadata
+from troposphere.autoscaling import Tags as AutoScalingTags
 from troposphere.cloudformation import (
     Init,
     InitConfig,
@@ -19,7 +20,6 @@ from troposphere.elasticloadbalancingv2 import (
     TargetGroup,
 )
 from troposphere.iam import InstanceProfile, Policy, PolicyType, Role
-
 from vars import (
     availability_zones,
     container_instances_ec2_ami_id,
@@ -28,9 +28,9 @@ from vars import (
     instance_type,
     keyname,
     name,
+    tags,
     vpc_id,
     vpc_subnets,
-    tags,
 )
 
 t = Template()

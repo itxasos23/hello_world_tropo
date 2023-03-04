@@ -21,7 +21,7 @@ tags = {
     "Env": env,
     "Tribe": tribe,
     "Squad": squad,
-    "CostCenter": cost_center
+    "CostCenter": cost_center,
 }
 
 

@@ -8,20 +8,7 @@ This project has two main folders:
 
 The `infra` section is configurable via the parameters set in `infra/vars.py` file.
 
-
-Future work/Nice to haves:
-- Usability:
-  - Refactor to accept different parameter setting (python arguments, env vars, etc.)
-  - Add output options (direct to file, to std_out, `yaml` vs. `json`, etc.)
-  - Add parameter validation (maybe even checking for existence; e.g. check that a given keypair exists via `aws cli` before building the template).
-
-- AutoScaling:
-  - ECS Container Instances AutoScaling based on average Host CPU usage.
-  - ECS Service Tasks AutoScaling based on average Container CPU usage.
-  - Parametrize AutoScaling configuration.
-
-- Reusability:
-  - Add mapping for AMI selection and availability zone selection based on AWS Region.
+The project expects a VPC with 2 subnets and an Internet Gateway to be present (ids provided via `infra/vars.py` file).
 
 
 ## Infra
@@ -125,4 +112,22 @@ Choose a semantic name for the stack (e.g. `tropo-ecs-server`), identify the tem
 e.g.
 
 > `aws cloudformation create-stack --stack-name tropo-ecs-server --template-body file://output/tropo_out.yaml --capabilities CAPABILITY_IAM`
+
+
+
+## Future Work
+
+Future work/Nice to haves:
+- Usability:
+  - Refactor to accept different parameter setting (python arguments, env vars, etc.)
+  - Add output options (direct to file, to std_out, `yaml` vs. `json`, etc.)
+  - Add parameter validation (maybe even checking for existence; e.g. check that a given keypair exists via `aws cli` before building the template).
+
+- AutoScaling:
+  - ECS Container Instances AutoScaling based on average Host CPU usage.
+  - ECS Service Tasks AutoScaling based on average Container CPU usage.
+  - Parametrize AutoScaling configuration.
+
+- Reusability:
+  - Add mapping for AMI selection and availability zone selection based on AWS Region.
 
