@@ -91,7 +91,29 @@ e.g.
 
 ### Build the AWS CloudFormation template
 
-TBD
+To build the AWS CloudFormation template, add your desired parameters in `infra/vars.py` and invoke the `infra/main.py` script.
+`infra/main.py` will output the template to `stdout`. 
+
+Follow these steps to build the template to a file:
+1. review the variables in `infra/vars.py`
+
+> `cat infra/vars.py`
+
+2. Setup your python environment:
+  a. Setup an environment with python 3.11.0 (e.g. with [pyenv](https://github.com/pyenv/pyenv))
+
+> `pyenv virtualenv 3.11.0 tropo_dev`
+
+> `pyenv local tropo_dev`
+
+  b. Install dependencies from `requirements.txt`
+
+> `pip install -r requirements.txt`
+
+3. Invoke the `infra/main.py` script and pipe it to a file.
+
+> `python infra/main.py > output/tropo_out.yml`
+
 
 ### Create the AWS CloudFormation Stack
 
@@ -102,5 +124,5 @@ Choose a semantic name for the stack (e.g. `tropo-ecs-server`), identify the tem
 
 e.g.
 
-> `aws cloudformation create-stack --stack-name tropo-ecs-server --template-body file://output/tropo-ecs-server.yaml --capabilities CAPABILITY_IAM`
+> `aws cloudformation create-stack --stack-name tropo-ecs-server --template-body file://output/tropo_out.yaml --capabilities CAPABILITY_IAM`
 

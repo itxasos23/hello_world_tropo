@@ -1,5 +1,5 @@
 from troposphere import Base64, Join, Ref, Template, Tags
-from troposphere.autoscaling import AutoScalingGroup, LaunchConfiguration, Metadata
+from troposphere.autoscaling import AutoScalingGroup, LaunchConfiguration, Metadata, Tags as AutoScalingTags
 from troposphere.cloudformation import (
     Init,
     InitConfig,
@@ -288,7 +288,6 @@ ECSAutoScalingGroup = t.add_resource(
         AvailabilityZones=availability_zones,
         LaunchConfigurationName=Ref("ContainerInstances"),
         TargetGroupARNs=[Ref("ALBTargetGroup")],
-        Tags=Tags(**tags),
     )
 )
 
