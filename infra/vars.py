@@ -7,6 +7,23 @@ name = "tropo"
 ## Environment tag
 env = "staging"
 
+## Tribe
+tribe = "cloud"
+
+## Squad
+squad = "awesome_squad"
+
+## Cost center
+cost_center = "a_very_costly_center"
+
+tags = {
+    "Project": name,
+    "Env": env,
+    "Tribe": tribe,
+    "Squad": squad,
+    "CostCenter": cost_center
+}
+
 
 # EC2 Config
 # Configuration to setup the EC2 instances that provide compute resources to the ECS Cluster.

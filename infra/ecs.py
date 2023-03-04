@@ -1,4 +1,4 @@
-from troposphere import Base64, Join, Ref, Template
+from troposphere import Base64, Join, Ref, Template, Tags
 from troposphere.autoscaling import AutoScalingGroup, LaunchConfiguration, Metadata
 from troposphere.cloudformation import (
     Init,
@@ -30,6 +30,7 @@ from vars import (
     name,
     vpc_id,
     vpc_subnets,
+    tags,
 )
 
 t = Template()
@@ -287,16 +288,13 @@ ECSAutoScalingGroup = t.add_resource(
         AvailabilityZones=availability_zones,
         LaunchConfigurationName=Ref("ContainerInstances"),
         TargetGroupARNs=[Ref("ALBTargetGroup")],
+        Tags=Tags(**tags),
     )
 )
 
 
 # Cluster
-ECSCluster = t.add_resource(
-    Cluster(
-        "ECSCluster",
-    )
-)
+ECSCluster = t.add_resource(Cluster("ECSCluster", Tags=Tags(**tags)))
 
 
 # Service and Tasks
@@ -318,6 +316,7 @@ ECSService = t.add_resource(
             )
         ],
         TaskDefinition=Ref("ECSTaskDefinition"),
+        Tags=Tags(**tags),
     )
 )
 
@@ -376,16 +375,14 @@ ECSTaskDefinition = t.add_resource(
                 PortMappings=[PortMapping(ContainerPort=80)],
             )
         ],
+        Tags=Tags(**tags),
     )
 )
 
 
 # ALB
 ApplicationLoadBalancer = t.add_resource(
-    LoadBalancer(
-        "ApplicationLoadBalancer",
-        Subnets=vpc_subnets,
-    )
+    LoadBalancer("ApplicationLoadBalancer", Subnets=vpc_subnets, Tags=Tags(**tags))
 )
 
 ALBListener = t.add_resource(
@@ -414,6 +411,7 @@ ALBTargetGroup = t.add_resource(
         Protocol="HTTP",
         UnhealthyThresholdCount=5,
         VpcId=vpc_id,
+        Tags=Tags(**tags),
     )
 )
 
